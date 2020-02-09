@@ -1,8 +1,12 @@
 
-import 'question.dart';
+import 'package:quiz_app/quiz_brain.dart';
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+quiz_b q=quiz_b();
 void main() => runApp(QuizApp());
 
 
@@ -37,17 +41,10 @@ class _QuizState extends State<Quiz> {
   ];
 
 
-  List<question> qs=[ question( 'Albert Einstein was awarded the Nobel Prize in Physics.',true),
-    question('The American Civil War ended in 1776.',false),
-    question('A right triangle can never be equilateral.',true),
-    question('There are seven red stripes in the United States flag.',true),
-    question('No bird can fly backwards.',false),
-    question('Freddy Kreuger is the villain in the “Friday the 13th” movies.',false),
-    question('Baby koalas are called joeys.',true),
-    question('Brazil is the only country in the Americas whose official language is Portuguese.',true),
 
-  ];
-  int questno=0;
+
+
+  //int questno=0;
   @override
 
 
@@ -67,7 +64,7 @@ class _QuizState extends State<Quiz> {
           padding: EdgeInsets.all(10.0),
             child:  Center(
                 child: Text(
-                  qs[questno].ques,
+                  q.getquestion(),
 
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -96,7 +93,7 @@ class _QuizState extends State<Quiz> {
             ),
 
             onPressed: (){
-            bool correctanswer=qs[questno].ans;
+            bool correctanswer=q.getanswers();
             if(correctanswer==true)
               {
                 print('your answer is correct');
@@ -115,7 +112,7 @@ class _QuizState extends State<Quiz> {
                     )
 
               );
-              questno++;
+             q.nextquestion();
             });
 
                 },
@@ -140,7 +137,7 @@ class _QuizState extends State<Quiz> {
     ),
     ),
     onPressed: (){
-    bool correctanswer=qs[questno].ans;
+    bool correctanswer=q.getanswers();
       if(correctanswer==true)
       {
         print('your answer is correct');
@@ -158,7 +155,7 @@ class _QuizState extends State<Quiz> {
               color:Colors.red,
             )
         );
-        questno++;
+        q.nextquestion();
       });
 
               },
