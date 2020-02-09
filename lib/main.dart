@@ -43,7 +43,7 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   List <Icon> Sc=[];
 
-
+int count=0;
   void checkanswer(bool youranswer)
   {
 
@@ -81,6 +81,7 @@ class _QuizState extends State<Quiz> {
                 )
                   );
             print('true');
+            print(count);
           }
 
           else {
@@ -95,7 +96,8 @@ class _QuizState extends State<Quiz> {
             print('false');
 
           }
-          q.nextquestion();
+        q.nextquestion();
+          count++;
         }
 
 

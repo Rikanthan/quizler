@@ -36,8 +36,8 @@ class quiz_b
   }
   bool isfinished()
   {
-    bool ch;
-    if(_questionno>=_qs.length)
+
+    if(_questionno>=_qs.length-1)
       {
          return true;
       }
