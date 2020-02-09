@@ -1,6 +1,6 @@
 
 import 'package:quiz_app/quiz_brain.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,11 @@ void main() => runApp(QuizApp());
 
 
 class QuizApp extends StatelessWidget {
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -36,9 +41,67 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  List <Icon> Scorekeeper=[
+  List <Icon> Sc=[];
 
-  ];
+
+  void checkanswer(bool youranswer)
+  {
+
+    bool correctanswer=q.getanswers();
+    setState(() {
+
+      if(q.isfinished()==true) {
+
+        Alert(
+          context: context,
+          type: AlertType.error,
+          title: "Attention",
+          desc: "You reach the destination",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "Quiz finished",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+            )
+          ],
+        ).show();
+    q.reset();
+        Sc=[];
+      }
+    else
+        {
+        if (correctanswer == youranswer) {
+            Sc.add(
+                Icon(
+                  Icons.check,
+                  color: Colors.green,
+                )
+                  );
+            print('true');
+          }
+
+          else {
+            Sc.add(
+                Icon(
+                  Icons.close,
+                  color: Colors.red,
+                )
+
+            );
+
+            print('false');
+
+          }
+          q.nextquestion();
+        }
+
+
+        });
+
+  }
 
 
 
@@ -93,27 +156,7 @@ class _QuizState extends State<Quiz> {
             ),
 
             onPressed: (){
-            bool correctanswer=q.getanswers();
-            if(correctanswer==true)
-              {
-                print('your answer is correct');
-              }
-            else
-              {
-                print('your answer incorrect');
-              }
-
-            setState(() {
-
-                  Scorekeeper.add(
-                    Icon(
-                     Icons.check,
-                      color: Colors.green,
-                    )
-
-              );
-             q.nextquestion();
-            });
+           checkanswer(true);
 
                 },
             ),
@@ -137,26 +180,7 @@ class _QuizState extends State<Quiz> {
     ),
     ),
     onPressed: (){
-    bool correctanswer=q.getanswers();
-      if(correctanswer==true)
-      {
-        print('your answer is correct');
-
-
-      }
-      else
-      {
-        print('your answer incorrect');
-      }
-      setState(() {
-        Scorekeeper.add(
-            Icon(
-              Icons.clear,
-              color:Colors.red,
-            )
-        );
-        q.nextquestion();
-      });
+    checkanswer(false);
 
               },
             ),
@@ -164,7 +188,9 @@ class _QuizState extends State<Quiz> {
 
             ),
     ),
-
+      Row(
+        children: Sc,
+      )
 
 
 

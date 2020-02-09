@@ -34,6 +34,24 @@ class quiz_b
   {
     return _qs[_questionno].ans;
   }
+  bool isfinished()
+  {
+    bool ch;
+    if(_questionno>=_qs.length)
+      {
+         return true;
+      }
+    else
+      {
+         return false;
+      }
 
 
+    }
+    void reset()
+    {
+
+          _questionno=0;
+
+    }
 }
