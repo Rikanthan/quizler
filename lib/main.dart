@@ -1,5 +1,5 @@
 
-
+import 'question.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -35,11 +35,18 @@ class _QuizState extends State<Quiz> {
   List <Icon> Scorekeeper=[
 
   ];
-  List <String> questions=['Albert Einstein was awarded the Nobel Prize in Physics.','The American Civil War ended in 1776.',
-'A right triangle can never be equilateral.','There are seven red stripes in the United States flag.','No bird can fly backwards.',
-'Freddy Kreuger is the villain in the “Friday the 13th” movies.','Baby koalas are called joeys.','Brazil is the only country in the Americas whose official language is Portuguese.'
+
+
+  List<question> qs=[ question( 'Albert Einstein was awarded the Nobel Prize in Physics.',true),
+    question('The American Civil War ended in 1776.',false),
+    question('A right triangle can never be equilateral.',true),
+    question('There are seven red stripes in the United States flag.',true),
+    question('No bird can fly backwards.',false),
+    question('Freddy Kreuger is the villain in the “Friday the 13th” movies.',false),
+    question('Baby koalas are called joeys.',true),
+    question('Brazil is the only country in the Americas whose official language is Portuguese.',true),
+
   ];
-  List<bool> answers=[true,false,true,true,false,false,true,true];
   int questno=0;
   @override
 
@@ -60,8 +67,8 @@ class _QuizState extends State<Quiz> {
           padding: EdgeInsets.all(10.0),
             child:  Center(
                 child: Text(
-                  questions[questno]
-                  ,
+                  qs[questno].ques,
+
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 25.0,
@@ -89,7 +96,7 @@ class _QuizState extends State<Quiz> {
             ),
 
             onPressed: (){
-            bool correctanswer=answers[questno];
+            bool correctanswer=qs[questno].ans;
             if(correctanswer==true)
               {
                 print('your answer is correct');
@@ -133,7 +140,7 @@ class _QuizState extends State<Quiz> {
     ),
     ),
     onPressed: (){
-      bool correctanswer=answers[questno];
+    bool correctanswer=qs[questno].ans;
       if(correctanswer==true)
       {
         print('your answer is correct');
